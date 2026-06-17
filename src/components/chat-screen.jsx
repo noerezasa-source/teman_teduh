@@ -187,28 +187,68 @@ function CrisisAlertBanner({ onOpenModal, onDismiss }) {
 
 // ─── ChatScreen ──────────────────────────────────────────────────────────────
 
-export function ChatScreen({ mood, onEnd, onViewTimeline, isDark, toggleDark, mounted }) {
+export function ChatScreen({ mood, sessionId, onEnd, onViewTimeline, isDark, toggleDark, mounted }) {
   const [messages, setMessages] = useState([
     { id: 1, sender: "ai", text: getWelcomeMessage(mood) },
   ])
   const [input, setInput] = useState("")
   const [selectedAge, setSelectedAge] = useState("15-25")
   const [isLoading, setIsLoading] = useState(false)
+  const [historyLoading, setHistoryLoading] = useState(true)
   const [showConfirmEnd, setShowConfirmEnd] = useState(false)
   const [showCrisisAlert, setShowCrisisAlert] = useState(false)
   const [showCrisisModal, setShowCrisisModal] = useState(false)
-  const [sessionId] = useState(() => {
-    if (typeof window === "undefined") return ""
-    return crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2, 15)
-  })
   const scrollRef = useRef(null)
   const textareaRef = useRef(null)
+
+  useEffect(() => {
+    if (!sessionId) {
+      setHistoryLoading(false)
+      return
+    }
+
+    const loadHistory = async () => {
+      try {
+        setHistoryLoading(true)
+        const { supabase } = await import("@/lib/db")
+        const { data, error } = await supabase
+          .from("tt_chat_messages")
+          .select("id, sender, message_text, created_at")
+          .eq("session_id", sessionId)
+          .order("created_at", { ascending: true })
+
+        if (error) throw error
+
+        if (data && data.length > 0) {
+          const formatted = data.map((msg) => ({
+            id: msg.id,
+            sender: msg.sender,
+            text: msg.message_text,
+          }))
+          setMessages(formatted)
+        } else {
+          setMessages([
+            { id: 1, sender: "ai", text: getWelcomeMessage(mood) },
+          ])
+        }
+      } catch (err) {
+        console.error("Failed to load chat history:", err)
+        setMessages([
+          { id: 1, sender: "ai", text: getWelcomeMessage(mood) },
+        ])
+      } finally {
+        setHistoryLoading(false)
+      }
+    }
+
+    loadHistory()
+  }, [sessionId, mood])
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
     }
-  }, [messages, isLoading])
+  }, [messages, isLoading, historyLoading])
 
   const adjustHeight = useCallback(() => {
     const el = textareaRef.current
@@ -411,72 +451,81 @@ export function ChatScreen({ mood, onEnd, onViewTimeline, isDark, toggleDark, mo
         {/* Messages */}
         <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-6 md:px-6">
           <div className="mx-auto flex max-w-2xl flex-col space-y-6">
-            {messages.map((msg) => (
-              <div
-                key={msg.id}
-                className={`flex msg-enter ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
-              >
-                {msg.sender === "user" ? (
-                  <div className="max-w-[80%] rounded-2xl rounded-br-md bg-[#0FA57C] dark:bg-[#0D8F6B] px-4.5 py-3 text-sm text-white shadow-sm shadow-[#0FA57C]/10">
-                    <span className="whitespace-pre-line leading-relaxed break-words">{msg.text}</span>
+            {historyLoading ? (
+              <div className="flex flex-col items-center justify-center py-20 gap-3">
+                <span className="h-7 w-7 rounded-full border-2 border-slate-200 border-t-[#0FA57C] dark:border-slate-800 dark:border-t-[#34D399] animate-spin" />
+                <p className="text-xs text-slate-400 dark:text-slate-500 font-medium">Memulihkan percakapan...</p>
+              </div>
+            ) : (
+              <>
+                {messages.map((msg) => (
+                  <div
+                    key={msg.id}
+                    className={`flex msg-enter ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
+                  >
+                    {msg.sender === "user" ? (
+                      <div className="max-w-[80%] rounded-2xl rounded-br-md bg-[#0FA57C] dark:bg-[#0D8F6B] px-4.5 py-3 text-sm text-white shadow-sm shadow-[#0FA57C]/10">
+                        <span className="whitespace-pre-line leading-relaxed break-words">{msg.text}</span>
+                      </div>
+                    ) : (
+                      /* AI bubble dengan avatar */
+                      <div className="flex items-start gap-2.5 w-full max-w-[92%] sm:max-w-[82%]">
+                        {/* Avatar TemanTeduh */}
+                        <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg overflow-hidden shadow-sm">
+                          <img src="/logo.png" alt="TemanTeduh" className="h-full w-full object-cover scale-[1.4]" />
+                        </div>
+                        {/* Bubble konten */}
+                        <div className="flex-1 rounded-2xl rounded-tl-md bg-white dark:bg-[#111A24] px-5 py-3 text-sm text-[#1E293B] dark:text-[#E2E8F0] shadow-sm dark:shadow-black/20">
+                          {/* Loading dots tampil di dalam bubble saat teks masih kosong */}
+                          {msg.text === "" && isLoading ? (
+                            <div className="flex items-center gap-1.5 py-0.5">
+                              <span className="h-2 w-2 rounded-full bg-[#0FA57C] dark:bg-[#34D399] opacity-60 animate-bounce [animation-delay:0ms]" />
+                              <span className="h-2 w-2 rounded-full bg-[#0FA57C] dark:bg-[#34D399] opacity-60 animate-bounce [animation-delay:150ms]" />
+                              <span className="h-2 w-2 rounded-full bg-[#0FA57C] dark:bg-[#34D399] opacity-60 animate-bounce [animation-delay:300ms]" />
+                            </div>
+                          ) : (
+                            <div className="flex flex-col gap-2.5" style={{ hyphens: "none", overflowWrap: "break-word", wordBreak: "break-word" }}>
+                              {renderMarkdown(msg.text)}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </div>
-                ) : (
-                  /* AI bubble dengan avatar */
-                  <div className="flex items-start gap-2.5 w-full max-w-[92%] sm:max-w-[82%]">
-                    {/* Avatar TemanTeduh */}
-                    <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg overflow-hidden shadow-sm">
-                      <img src="/logo.png" alt="TemanTeduh" className="h-full w-full object-cover scale-[1.4]" />
-                    </div>
-                    {/* Bubble konten */}
-                    <div className="flex-1 rounded-2xl rounded-tl-md bg-white dark:bg-[#111A24] px-5 py-3 text-sm text-[#1E293B] dark:text-[#E2E8F0] shadow-sm dark:shadow-black/20">
-                      {/* Loading dots tampil di dalam bubble saat teks masih kosong */}
-                      {msg.text === "" && isLoading ? (
-                        <div className="flex items-center gap-1.5 py-0.5">
-                          <span className="h-2 w-2 rounded-full bg-[#0FA57C] dark:bg-[#34D399] opacity-60 animate-bounce [animation-delay:0ms]" />
-                          <span className="h-2 w-2 rounded-full bg-[#0FA57C] dark:bg-[#34D399] opacity-60 animate-bounce [animation-delay:150ms]" />
-                          <span className="h-2 w-2 rounded-full bg-[#0FA57C] dark:bg-[#34D399] opacity-60 animate-bounce [animation-delay:300ms]" />
-                        </div>
-                      ) : (
-                        <div className="flex flex-col gap-2.5" style={{ hyphens: "none", overflowWrap: "break-word", wordBreak: "break-word" }}>
-                          {renderMarkdown(msg.text)}
-                        </div>
-                      )}
+                ))}
+
+                {/* Quick reply chips */}
+                {showQuickReplies && quickReplies.length > 0 && (
+                  <div className="flex flex-wrap gap-2 msg-enter justify-start pl-10">
+                    {quickReplies.map((reply) => (
+                      <button
+                        key={reply}
+                        type="button"
+                        onClick={() => handleSend(reply)}
+                        className="rounded-full border border-transparent bg-white/80 dark:bg-[#111A24]/60 px-4 py-2 text-xs font-semibold text-[#0FA57C] dark:text-[#34D399] shadow-sm transition-all duration-200 hover:bg-[#E0F5EE] dark:hover:bg-[#0F2D24] hover:shadow-md"
+                      >
+                        {reply}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {/* Loading dots (dengan avatar) sebelum placeholder AI ditambahkan */}
+                {showLoadingDots && (
+                  <div className="flex justify-start msg-enter">
+                    <div className="flex items-start gap-2.5">
+                      <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg overflow-hidden shadow-sm">
+                        <img src="/logo.png" alt="TemanTeduh" className="h-full w-full object-cover scale-[1.4]" />
+                      </div>
+                      <div className="flex items-center gap-1.5 rounded-3xl rounded-tl-md bg-white dark:bg-[#111A24] px-5 py-4 shadow-sm dark:shadow-black/10">
+                        <span className="h-2 w-2 rounded-full bg-[#0FA57C] dark:bg-[#34D399] opacity-60 animate-bounce [animation-delay:0ms]" />
+                        <span className="h-2 w-2 rounded-full bg-[#0FA57C] dark:bg-[#34D399] opacity-60 animate-bounce [animation-delay:150ms]" />
+                        <span className="h-2 w-2 rounded-full bg-[#0FA57C] dark:bg-[#34D399] opacity-60 animate-bounce [animation-delay:300ms]" />
+                      </div>
                     </div>
                   </div>
                 )}
-              </div>
-            ))}
-
-            {/* Quick reply chips */}
-            {showQuickReplies && quickReplies.length > 0 && (
-              <div className="flex flex-wrap gap-2 msg-enter justify-start pl-10">
-                {quickReplies.map((reply) => (
-                  <button
-                    key={reply}
-                    type="button"
-                    onClick={() => handleSend(reply)}
-                    className="rounded-full border border-transparent bg-white/80 dark:bg-[#111A24]/60 px-4 py-2 text-xs font-semibold text-[#0FA57C] dark:text-[#34D399] shadow-sm transition-all duration-200 hover:bg-[#E0F5EE] dark:hover:bg-[#0F2D24] hover:shadow-md"
-                  >
-                    {reply}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {/* Loading dots (dengan avatar) sebelum placeholder AI ditambahkan */}
-            {showLoadingDots && (
-              <div className="flex justify-start msg-enter">
-                <div className="flex items-start gap-2.5">
-                  <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg overflow-hidden shadow-sm">
-                    <img src="/logo.png" alt="TemanTeduh" className="h-full w-full object-cover scale-[1.4]" />
-                  </div>
-                  <div className="flex items-center gap-1.5 rounded-3xl rounded-tl-md bg-white dark:bg-[#111A24] px-5 py-4 shadow-sm dark:shadow-black/10">
-                    <span className="h-2 w-2 rounded-full bg-[#0FA57C] dark:bg-[#34D399] opacity-60 animate-bounce [animation-delay:0ms]" />
-                    <span className="h-2 w-2 rounded-full bg-[#0FA57C] dark:bg-[#34D399] opacity-60 animate-bounce [animation-delay:150ms]" />
-                    <span className="h-2 w-2 rounded-full bg-[#0FA57C] dark:bg-[#34D399] opacity-60 animate-bounce [animation-delay:300ms]" />
-                  </div>
-                </div>
-              </div>
+              </>
             )}
           </div>
         </div>
