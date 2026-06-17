@@ -1,0 +1,171 @@
+=== TEMANTEDUH PREMIUM CONVERSATION QUALITY EVALUATION LOG ===
+Date: 2026-06-17T06:10:01.965Z
+
+Scenario #1: Overthinking
+Input: "Gimana ya cara stop overthinking soal masa depan?"
+Emotion Analysis: {"emotion":"cemas","confidence":0.95,"intensity":"sedang","sentiment":"negatif","risk":"rendah"}
+Risk Level: rendah
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Rasanya kita semua pernah mengalami itu, kecemasan soal apa yang akan terjadi nanti. Kedengarannya kamu lagi terjebak dalam pikiran tentang hal-hal yang belum tentu terjadi, dan itu membuatmu merasa cemas. 
+
+Coba deh, kita mulai dari yang sederhana. Kamu bisa coba untuk fokus pada apa yang bisa kamu kontrol saat ini. Misalnya, apa yang kamu bisa lakukan hari ini untuk membuat dirimu merasa lebih baik? Bisa jadi sesuatu yang kecil seperti minum air yang cukup, atau berjalan sebentar di luar. Atau, kamu bisa coba untuk membuat daftar kecil tentang apa yang perlu kamu lakukan hari ini, dan secara perlahan kamu coret satu per satu setelah selesai. 
+
+Apa hal terburuk yang sebenarnya kamu takutkan terjadi di masa depan? Mungkin kita bisa menghadapinya bersama, dan cari cara untuk membuatnya tidak terlalu menakutkan."
+----------------------------------------------------------------------
+Scenario #2: Stres Kerja
+Input: "Stres banget kerjaan numpuk deadline besok pagi belom beres semua."
+Emotion Analysis: {"emotion":"cemas","confidence":0.95,"intensity":"tinggi","sentiment":"negatif","risk":"sedang"}
+Risk Level: sedang
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Wah, kedengarannya kamu lagi kejar-kejaran sama waktu ya. Deadline besok pagi itu rasanya memang sangat mepet, apalagi kalau kerjaan masih banyak yang belum kelar. Kamu sudah coba buat daftar prioritas atau belum, supaya bisa fokus ke tugas yang paling penting dulu?"
+----------------------------------------------------------------------
+Scenario #3: Stres Sekolah
+Input: "Aku stres banget banyak tugas sekolah menumpuk dan gurunya galak."
+Emotion Analysis: {"emotion":"stres","confidence":0.95,"intensity":"tinggi","sentiment":"negatif","risk":"sedang"}
+Risk Level: sedang
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Jadi tugas sekolah lagi menumpuk ya, dan gurunya lagi galak, itu pasti bikin kamu kepala pusing. Rasanya kamu kayaknya lagi dibebani banyak hal sekaligus, dan takut tidak bisa selesaikan semua tugas tepat waktu. Apa yang paling membuat kamu stres dari semua tugas itu, sih? Ada tugas tertentu yang lebih membuat kamu khawatir daripada yang lain?"
+----------------------------------------------------------------------
+Scenario #4: Burnout
+Input: "Gue ngerasa burnout banget sama rutinitas harian, rasanya pengen lepas semua."
+Emotion Analysis: {"emotion":"lelah","confidence":0.85,"intensity":"tinggi","sentiment":"negatif","risk":"sedang"}
+Risk Level: sedang
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Kedengarannya kamu lagi merasa terjebak dan kehabisan energi, ya. Rutinitas yang sama setiap hari bisa bikin kamu merasa seperti di dalam lingkaran yang tidak ada ujungnya. Apa yang paling membuat kamu merasa lelah dan pengen lepas dari semua itu? Apakah karena pekerjaan, hubungan, atau mungkin karena kamu merasa tidak punya waktu untuk diri sendiri?"
+----------------------------------------------------------------------
+Scenario #5: Kesepian
+Input: "Aku ngerasa kesepian banget di kota rantau ini, ga ada temen ngobrol."
+Emotion Analysis: {"emotion":"kesepian","confidence":0.95,"intensity":"tinggi","sentiment":"negatif","risk":"rendah"}
+Risk Level: rendah
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Kedengarannya kamu merasa seperti ikan kecil di lautan besar, ya? Kota rantau memang bisa membuat kita merasa terisolasi, apalagi kalau belum punya banyak kenalan. Aku penasaran, apa yang biasanya kamu lakukan untuk menghabiskan waktu di kota rantau ini? Apakah kamu sudah mencoba cari komunitas atau grup hobi yang sesuai dengan minatmu?"
+----------------------------------------------------------------------
+Scenario #6: Konflik Keluarga
+Input: "Orang tua selalu banding-bandingin aku sama anak tetangga, capek batin."
+Emotion Analysis: {"emotion":"galau","confidence":0.85,"intensity":"sedang","sentiment":"negatif","risk":"rendah"}
+Risk Level: rendah
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Rasanya kayak selalu ada perbandingan yang nggak adil gitu. kayak, "kenapa kamu nggak bisa seperti dia?" atau "dia aja bisa, kamu nggak bisa?" itu pasti bikin kesel dan capek banget. Apa menurut kamu, hal yang paling mengganggu adalah perbandingan itu sendiri, atau lebih ke karena orang tua kurang menghargai usaha dan pencapaian kamu?"
+----------------------------------------------------------------------
+Scenario #7: Konflik Pasangan
+Input: "Aku lagi berantem hebat sama pacar gara-gara salah paham sepele."
+Emotion Analysis: {"emotion":"marah","confidence":0.85,"intensity":"sedang","sentiment":"negatif","risk":"rendah"}
+Risk Level: rendah
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Jadi salah paham sepele aja bisa bikin kalian berdua jadi marah-marah gitu, ya? Kedengarannya kayak ada yang lebih dalam dari sekedar salah paham biasa. Apa sebenarnya yang membuat kamu merasa paling kesal atau sakit hati dari kejadian itu?"
+----------------------------------------------------------------------
+Scenario #8: Putus Cinta
+Input: "Baru aja putus sama pacar setelah 3 tahun bareng. Sakit banget."
+Emotion Analysis: {"emotion":"sedih","confidence":0.98,"intensity":"tinggi","sentiment":"negatif","risk":"sedang"}
+Risk Level: sedang
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Gue bisa bayangin betapa sakitnya. 3 tahun itu lama, banyak kenangan yang sudah terbangun bersama. Sekarang semua itu tinggal kenangan aja, pasti rasanya sangat berat. Apa yang paling kamu rindukan dari dia sekarang?"
+----------------------------------------------------------------------
+Scenario #9: Takut Masa Depan
+Input: "Aku takut banget masa depan suram dan ga dapet kerjaan layak."
+Emotion Analysis: {"emotion":"takut","confidence":0.95,"intensity":"tinggi","sentiment":"negatif","risk":"sedang"}
+Risk Level: sedang
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Rasanya kayak beban yang luar biasa berat ya, kalau pikiran tentang masa depan yang suram terus menghantui. Aku jadi penasaran, apa yang membuat kamu memiliki persepsi seperti itu tentang masa depanmu? Apakah ada pengalaman atau kejadian tertentu yang membuat kamu merasa begitu? Atau mungkin ada ketakutan tertentu yang terus mengganggu pikiranmu?"
+----------------------------------------------------------------------
+Scenario #10: Gagal Mencapai Target
+Input: "Hasil ujian kemarin jelek banget padahal udah belajar mati-matian."
+Emotion Analysis: {"emotion":"kecewa","confidence":0.92,"intensity":"tinggi","sentiment":"negatif","risk":"sedang"}
+Risk Level: sedang
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Rasanya pasti sangat kecewa ya, apa lagi setelah kamu udah berusaha sekuat tenaga. Kedengarannya kamu benar-benar berharap bisa dapat hasil yang lebih baik. Apa yang sebenarnya membuat kamu paling kecewa dari hasil ujian itu?"
+----------------------------------------------------------------------
+Scenario #11: Merasa Tidak Cukup Baik
+Input: "Kenapa ya aku selalu ngerasa ga pernah cukup baik dibanding orang lain?"
+Emotion Analysis: {"emotion":"kecewa","confidence":0.85,"intensity":"sedang","sentiment":"negatif","risk":"rendah"}
+Risk Level: rendah
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Rasanya kayak setiap kali lu lihat keberhasilan orang lain, lu jadi mikir tentang kekurangan lu sendiri ya? Seperti, "Mereka bisa, kenapa aku tidak?" atau "Mereka lebih baik dari aku". Kayak ada perbandingan terus yang bikin lu merasa kurang. Apa menurut lu, hal itu karena lu terlalu fokus sama kelebihan orang lain, atau mungkin karena lu sendiri yang terlalu keras sama diri lu sendiri?"
+----------------------------------------------------------------------
+Scenario #12: Kehilangan Motivasi
+Input: "Udah seminggu ini males ngapa-ngapain, kehilangan motivasi."
+Emotion Analysis: {"emotion":"galau","confidence":0.85,"intensity":"sedang","sentiment":"negatif","risk":"rendah"}
+Risk Level: rendah
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Kedengarannya kayak kamu sedang terjebak dalam lingkaran yang bikin kamu merasa lelah dan tidak bersemangat. Seperti ada beban yang terus mengganjal, tapi kamu tidak tahu harus melepaskannya bagaimana. Apa yang terakhir kamu lakukan sebelum merasa kehilangan motivasi ini? Mungkin ada sesuatu yang terjadi atau berubah dalam hidupmu yang membuat kamu merasa begitu?"
+----------------------------------------------------------------------
+Scenario #13: Quarter-life Crisis
+Input: "Umur 25 tapi belum punya apa-apa, bingung arah hidup mau kemana."
+Emotion Analysis: {"emotion":"galau","confidence":0.85,"intensity":"sedang","sentiment":"negatif","risk":"rendah"}
+Risk Level: rendah
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Rasanya kayak semua orang sekitar udah punya tujuan hidup yang jelas, tapi kamu masih stuck di tengah-tengah. Apa yang paling bikin kamu merasa "belum punya apa-apa" sih? Apakah itu tentang pekerjaan, hubungan, atau mungkin sesuatu yang lain?"
+----------------------------------------------------------------------
+Scenario #14: Imposter Syndrome
+Input: "Kerjaan baru ini rasanya terlalu berat, aku merasa kayak penipu di sini."
+Emotion Analysis: {"emotion":"cemas","confidence":0.85,"intensity":"sedang","sentiment":"negatif","risk":"rendah"}
+Risk Level: rendah
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Kayaknya kamu lagi merasa tidak cukup siap atau tidak cukup pantas untuk posisi baru ini, ya? Aku pernah dengar istilah "impostor syndrome" yang kayaknya cocok buat situasi kayak gini. Rasanya kita kayak berpura-pura menjadi orang lain, padahal sebenarnya kita tidak yakin bisa memenuhi ekspektasi orang lain. Apa yang membuat kamu merasa kayak penipu di kerjaan baru ini? Apakah karena kurang pengalaman, atau mungkin karena kamu merasa tidak cukup pintar dibandingkan sama rekan-rekan kerjamu?"
+----------------------------------------------------------------------
+Scenario #15: Tekanan Sosial
+Input: "Teman-teman sebayaku udah pada nikah dan beli rumah, aku merasa tertinggal jauh."
+Emotion Analysis: {"emotion":"galau","confidence":0.85,"intensity":"sedang","sentiment":"negatif","risk":"rendah"}
+Risk Level: rendah
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Kedengarannya kamu lagi merasa ketinggalan dan itu bikin kamu sedikit down, ya? Sepertinya kamu sedang membandingkan diri dengan teman-teman sebayamu yang sudah mencapai beberapa milestone. Tapi, apa kamu pernah berpikir bahwa setiap orang memiliki jalur hidup yang berbeda-beda? Mungkin teman-temanmu itu sudah lebih siap atau memiliki prioritas yang berbeda. 
+
+Coba deh, kamu ambil napas dalam-dalam dan pikirkan apa yang sebenarnya kamu ingin capai dalam hidup. Apa yang membuat kamu bahagia dan puas? Bukan tentang apa yang teman-temanmu capai, tapi tentang apa yang kamu sendiri inginkan. Mungkin ada hal-hal kecil yang bisa kamu lakukan hari ini untuk mendekatkan diri pada tujuanmu, seperti membuat daftarprioritas atau mengambil langkah kecil menuju arah yang kamu inginkan."
+----------------------------------------------------------------------
+Scenario #16: Rasa Bersalah
+Input: "Aku nyesel banget pernah ngecewain sahabat baikku dulu, bersalah terus rasanya."
+Emotion Analysis: {"emotion":"sedih","confidence":0.95,"intensity":"tinggi","sentiment":"negatif","risk":"sedang"}
+Risk Level: sedang
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Rasa bersalah itu memang berat ya, apalagi kalau masalahnya dengan sahabat baik. Kedengarannya kamu masih terpikir oleh kejadian itu dan merasa tidak bisa move on dari rasa bersalah. Apa yang membuat kamu merasa ngecewain sahabatmu dulu, dan apa yang kamu harapkan bisa beda kalau kejadian itu terjadi lagi sekarang?"
+----------------------------------------------------------------------
+Scenario #17: Duka / Kehilangan
+Input: "Nenek baru aja meninggal dunia, rasanya hampa banget rumah ini."
+Emotion Analysis: {"emotion":"sedih","confidence":0.95,"intensity":"tinggi","sentiment":"negatif","risk":"sedang"}
+Risk Level: sedang
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Rasanya pasti berat banget buat kamu sekarang. Nenek itu pasti orang yang sangat spesial buat kamu. Sekarang rumah terasa kosong dan sunyi, ya? Apa yang paling kamu rindukan dari nenek? Mungkin ada kenangan atau kegiatan yang selalu kamu lakukan bersama nenek yang sekarang terasa tidak sama lagi?"
+----------------------------------------------------------------------
+Scenario #18: Kurang Percaya Diri
+Input: "Aku minder banget kalau harus ngomong di depan umum, gemetaran."
+Emotion Analysis: {"emotion":"takut","confidence":0.85,"intensity":"sedang","sentiment":"negatif","risk":"rendah"}
+Risk Level: rendah
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Gue paham, rasanya kayak ada yang mengganjal di tenggorokan dan tangan jadi nggak bisa diam ya. kayaknya ini bukan cuma soal ngomong di depan umum aja, tapi juga tentang apa yang orang lain bakal pikir tentang kamu. Apa kamu pernah memikirkan apa yang orang lain bakal katakan atau pikir tentang kamu setelah kamu selesai berbicara?"
+----------------------------------------------------------------------
+Scenario #19: Sulit Mengambil Keputusan
+Input: "Bingung harus pilih lanjut kuliah atau langsung kerja, dua-duanya berat."
+Emotion Analysis: {"emotion":"galau","confidence":0.85,"intensity":"sedang","sentiment":"netral","risk":"rendah"}
+Risk Level: rendah
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Gue paham, kamu lagi di posisi yang cukup sulit. Lanjut kuliah atau langsung kerja, keduanya punya konsekuensi yang berbeda. Kalau lanjut kuliah, kamu harus siap dengan biaya dan waktu yang lebih lama, tapi bisa dapat pengetahuan yang lebih dalam dan mungkin peluang kerja yang lebih baik nanti. Tapi kalau langsung kerja, kamu bisa dapat pengalaman dan uang yang lebih cepat, tapi mungkin harus bersaing dengan yang lain dan nggak punya banyak waktu untuk fokus pada pendidikan.
+
+Apa yang membuat kamu ragu antara keduanya? Apakah kamu sudah punya gambaran apa yang ingin kamu capai di masa depan, atau kamu masih mencari-cari apa yang benar-benar kamu minati?"
+----------------------------------------------------------------------
+Scenario #20: Insomnia karena Cemas
+Input: "Udah jam 3 pagi tapi mata ga bisa merem gara-gara kepikiran ujian besok."
+Emotion Analysis: {"emotion":"cemas","confidence":0.95,"intensity":"tinggi","sentiment":"negatif","risk":"sedang"}
+Risk Level: sedang
+Triggered Crisis Intercept: NO (PASSED)
+Response:
+"Jam 3 pagi dan masih aja mikirin ujian besok, ya? Kayaknya kamu lagi dalam模式 "otak racing" nih, ga bisa dihentikan. Apa yang paling bikin kamu cemas tentang ujian besok, sih? Soalnya belum dipelajari atau takut tidak bisa menjawab dengan baik?"
+----------------------------------------------------------------------
