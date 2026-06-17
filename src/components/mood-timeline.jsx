@@ -39,25 +39,7 @@ export function MoodTimeline({ onBack, isDark, toggleDark }) {
         setHistory(data.history || [])
       }
 
-      // 2. Ambil data profile memory card
-      const resProfile = await fetch(`/api/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: "PING", // PING query untuk load profile saja (tapi ini panggil API chat, kita buat loader tersendiri atau query dari endpoint jika ada)
-          sessionId: "load-only",
-          userId: userId,
-          ageGroup: "15-25"
-        })
-      })
-      // Untuk amannya, kita fetch profile langsung via client query Supabase?
-      // Supabase credentials ada di client, tapi untuk modularitas kita gunakan fetch api chat dengan ping-like trigger,
-      // atau kita buat endpoint mini /api/profile?userId=...
-      // Mari kita query langsung lewat endpoint API /api/chat tapi intercept "PING" payload untuk mengembalikan data profil
-      // itu sangat cerdik! Mari kita buat router chat mengembalikan data profil jika di-PING.
-      if (resProfile.ok) {
-        // Kami biarkan load profile berjalan
-      }
+
     } catch (err) {
       console.error("Error fetching timeline data:", err)
     } finally {
