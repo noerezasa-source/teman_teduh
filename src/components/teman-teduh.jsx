@@ -11,6 +11,7 @@ export function TemanTeduh() {
   const [page, setPage] = useState("landing")
   const [mood, setMood] = useState(null)
   const [activeSessionId, setActiveSessionId] = useState("")
+  const [timelineReferrer, setTimelineReferrer] = useState("landing")
   const { isDark, toggle: toggleDark, mounted } = useDarkMode()
 
   // Hydrate state from localStorage on client mount (avoids Next.js SSR hydration mismatch)
@@ -19,10 +20,12 @@ export function TemanTeduh() {
       const savedPage = localStorage.getItem("tt_page_state")
       const savedMood = localStorage.getItem("tt_selected_mood")
       const savedSessionId = localStorage.getItem("tt_active_session_id")
+      const savedReferrer = localStorage.getItem("tt_timeline_referrer")
 
       if (savedPage) setPage(savedPage)
       if (savedMood) setMood(JSON.parse(savedMood))
       if (savedSessionId) setActiveSessionId(savedSessionId)
+      if (savedReferrer) setTimelineReferrer(savedReferrer)
     }
   }, [])
 
@@ -30,6 +33,13 @@ export function TemanTeduh() {
     setPage(newPage)
     if (typeof window !== "undefined") {
       localStorage.setItem("tt_page_state", newPage)
+    }
+  }
+
+  const handleSetTimelineReferrer = (val) => {
+    setTimelineReferrer(val)
+    if (typeof window !== "undefined") {
+      localStorage.setItem("tt_timeline_referrer", val)
     }
   }
 
@@ -96,7 +106,10 @@ export function TemanTeduh() {
         mood={mood} 
         sessionId={activeSessionId}
         onEnd={handleEndChat} 
-        onViewTimeline={() => handleSetPage("timeline")} 
+        onViewTimeline={() => {
+          handleSetTimelineReferrer("chat")
+          handleSetPage("timeline")
+        }} 
         {...darkProps} 
       />
     )
@@ -105,7 +118,7 @@ export function TemanTeduh() {
   if (page === "timeline") {
     return (
       <MoodTimeline 
-        onBack={() => handleSetPage("landing")} 
+        onBack={() => handleSetPage(timelineReferrer || (activeSessionId ? "chat" : "landing"))} 
         {...darkProps} 
       />
     )
@@ -114,7 +127,10 @@ export function TemanTeduh() {
   return (
     <LandingScreen 
       onStart={() => handleSetPage("mood")} 
-      onViewTimeline={() => handleSetPage("timeline")}
+      onViewTimeline={() => {
+        handleSetTimelineReferrer("landing")
+        handleSetPage("timeline")
+      }}
       {...darkProps} 
     />
   )
