@@ -10,7 +10,7 @@ const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 export async function POST(req) {
   try {
-    const { message, sessionId, userId, ageGroup = '15-25' } = await req.json();
+    const { message, sessionId, userId, ageGroup = '15-25', mood } = await req.json();
 
     if (!message || !sessionId || !userId) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });

@@ -283,7 +283,8 @@ export function ChatScreen({ mood, sessionId, onEnd, onViewTimeline, isDark, tog
           message: text,
           sessionId: sessionId,
           userId: getOrCreateUserId(),
-          ageGroup: selectedAge
+          ageGroup: selectedAge,
+          mood: mood
         }),
       })
 
