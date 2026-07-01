@@ -14,6 +14,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "TemanTeduh AI Premium - Sahabat Curhat & Pendamping Emosional 100% Anonim",
   description: "TemanTeduh AI adalah pendamping emosional cerdas dengan kecerdasan emosional (EI) dan memori jangka panjang untuk membantu meredakan cemas, sedih, dan stres secara aman dan 100% anonim.",
+  verification: {
+    google: "_OVnVrYfybQoxocn9hnwAdzbkdZA_dcM6EXx0CLwe4Q",
+  },
 };
 
 export default function RootLayout({ children }) {
